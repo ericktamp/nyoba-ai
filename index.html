@@ -38,12 +38,18 @@
                 overflow-x: hidden;
                 background: linear-gradient(
                     135deg,
-                    #667eea 0%,
-                    #764ba2 50%,
-                    #f093fb 100%
+                    #0a0a0a 0%,
+                    #1a0a1f 25%,
+                    #2d1b3d 50%,
+                    #1a0a1f 75%,
+                    #0a0a0a 100%
                 );
                 background-size: 400% 400%;
-                animation: gradientShift 20s ease infinite;
+                animation: gradientShift 15s ease infinite;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
             }
 
             @keyframes gradientShift {
@@ -56,69 +62,6 @@
                 100% {
                     background-position: 0% 50%;
                 }
-            }
-
-            /* NAVBAR */
-            .navbar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                padding: 20px 5%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 1000;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(20px);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .logo {
-                font-family: "Playfair Display", serif;
-                font-size: 28px;
-                font-weight: 900;
-                background: linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--secondary)
-                );
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            .nav-links {
-                display: flex;
-                gap: 30px;
-                align-items: center;
-            }
-
-            .nav-links a {
-                color: #333;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 15px;
-                transition: all 0.3s;
-                position: relative;
-            }
-
-            .nav-links a::after {
-                content: "";
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 0;
-                height: 3px;
-                background: var(--primary);
-                transition: width 0.3s;
-            }
-
-            .nav-links a:hover {
-                color: var(--primary);
-            }
-
-            .nav-links a:hover::after {
-                width: 100%;
             }
 
             /* FLOATING PARTICLES */
@@ -134,7 +77,8 @@
                 position: absolute;
                 font-size: 40px;
                 animation: float 25s infinite ease-in-out;
-                opacity: 0.3;
+                opacity: 0.4;
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
             }
 
             .particle:nth-child(1) {
@@ -162,6 +106,11 @@
                 left: 5%;
                 animation-delay: 12s;
             }
+            .particle:nth-child(6) {
+                top: 20%;
+                left: 90%;
+                animation-delay: 15s;
+            }
 
             @keyframes float {
                 0%,
@@ -179,28 +128,51 @@
                 }
             }
 
-            /* MAIN CONTAINER */
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                padding: 100px 20px 20px;
-                position: relative;
-                z-index: 1;
-            }
-
-            /* CHAT CARD */
+            /* LIQUID GLASS CHAT CARD */
             .chat-card {
                 width: 100%;
                 max-width: 900px;
-                background: rgba(255, 255, 255, 0.98);
-                border-radius: 30px;
-                box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(30px) saturate(180%);
+                -webkit-backdrop-filter: blur(30px) saturate(180%);
+                border-radius: 40px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 
+                    0 8px 32px 0 rgba(31, 38, 135, 0.37),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                    inset 0 -1px 1px rgba(255, 255, 255, 0.1);
                 overflow: hidden;
-                backdrop-filter: blur(20px);
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                position: relative;
+                z-index: 1;
                 animation: slideUp 0.8s ease-out;
+            }
+
+            /* Liquid glass shine effect */
+            .chat-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent
+                );
+                animation: shine 3s infinite;
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            @keyframes shine {
+                0% {
+                    left: -100%;
+                }
+                50%, 100% {
+                    left: 100%;
+                }
             }
 
             @keyframes slideUp {
@@ -216,16 +188,14 @@
 
             /* CHAT HEADER */
             .chat-header {
-                background: linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--secondary)
-                );
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
                 color: white;
                 padding: 35px;
                 text-align: center;
                 position: relative;
                 overflow: hidden;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             }
 
             .chat-header::before {
@@ -237,7 +207,7 @@
                 height: 200%;
                 background: radial-gradient(
                     circle,
-                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0.15) 0%,
                     transparent 70%
                 );
                 animation: ripple 15s infinite;
@@ -259,6 +229,7 @@
                 margin-bottom: 10px;
                 position: relative;
                 z-index: 1;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             }
 
             .chat-header p {
@@ -266,12 +237,14 @@
                 opacity: 0.95;
                 position: relative;
                 z-index: 1;
+                text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
             }
 
             .chat-header .icon {
                 font-size: 60px;
                 margin-bottom: 15px;
                 animation: pulse 2s ease-in-out infinite;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
             }
 
             @keyframes pulse {
@@ -289,8 +262,11 @@
                 height: 500px;
                 overflow-y: auto;
                 padding: 30px;
-                background: linear-gradient(to bottom, #fafbff, #ffffff);
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(10px);
                 scroll-behavior: smooth;
+                position: relative;
+                z-index: 2;
             }
 
             .chat-messages::-webkit-scrollbar {
@@ -298,17 +274,17 @@
             }
 
             .chat-messages::-webkit-scrollbar-track {
-                background: #f1f1f1;
+                background: rgba(255, 255, 255, 0.1);
                 border-radius: 10px;
             }
 
             .chat-messages::-webkit-scrollbar-thumb {
-                background: var(--primary);
+                background: rgba(255, 255, 255, 0.3);
                 border-radius: 10px;
             }
 
             .chat-messages::-webkit-scrollbar-thumb:hover {
-                background: var(--secondary);
+                background: rgba(255, 255, 255, 0.5);
             }
 
             /* MESSAGES */
@@ -341,21 +317,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 20px;
+                font-size: 11px;
+                font-weight: 700;
                 flex-shrink: 0;
-            }
-
-            .message.bot .message-avatar {
-                background: linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--secondary)
-                );
-                color: white;
-            }
-
-            .message.user .message-avatar {
-                background: linear-gradient(135deg, #f093fb, #764ba2);
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 color: white;
             }
 
@@ -365,25 +333,26 @@
                 border-radius: 20px;
                 line-height: 1.7;
                 font-size: 15px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
                 word-wrap: break-word;
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 
+                    0 8px 32px 0 rgba(31, 38, 135, 0.2),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.5);
             }
 
             .message.bot .message-content {
-                background: white;
-                border: 2px solid #f0f0f0;
                 border-radius: 20px 20px 20px 5px;
-                color: #333;
+                color: white;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             }
 
             .message.user .message-content {
-                background: linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--secondary)
-                );
-                color: white;
                 border-radius: 20px 20px 5px 20px;
+                color: white;
+                background: rgba(255, 255, 255, 0.3);
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             }
 
             /* TYPING INDICATOR */
@@ -397,8 +366,9 @@
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
-                background: var(--primary);
+                background: white;
                 animation: typing 1.4s infinite;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             }
 
             .typing-indicator span:nth-child(2) {
@@ -425,44 +395,55 @@
             /* CHAT INPUT */
             .chat-input-wrapper {
                 padding: 25px;
-                background: white;
-                border-top: 2px solid #f0f0f0;
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
                 display: flex;
                 gap: 15px;
                 align-items: center;
+                position: relative;
+                z-index: 2;
             }
 
             .chat-input-wrapper input {
                 flex: 1;
                 padding: 16px 24px;
-                border: 2px solid #e8ecef;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
                 border-radius: 25px;
                 font-size: 15px;
                 font-family: "Inter", sans-serif;
                 transition: all 0.3s;
+                color: white;
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .chat-input-wrapper input::placeholder {
+                color: rgba(255, 255, 255, 0.7);
             }
 
             .chat-input-wrapper input:focus {
                 outline: none;
-                border-color: var(--primary);
-                box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+                border-color: rgba(255, 255, 255, 0.5);
+                background: rgba(255, 255, 255, 0.25);
+                box-shadow: 
+                    0 0 0 4px rgba(255, 255, 255, 0.1),
+                    inset 0 2px 4px rgba(0, 0, 0, 0.1);
             }
 
             .chat-input-wrapper button {
                 padding: 16px 35px;
-                background: linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--secondary)
-                );
+                background: rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(10px);
                 color: white;
-                border: none;
+                border: 1px solid rgba(255, 255, 255, 0.4);
                 border-radius: 25px;
                 cursor: pointer;
                 font-size: 15px;
                 font-weight: 700;
                 transition: all 0.3s;
-                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
                 display: flex;
                 align-items: center;
                 gap: 8px;
@@ -470,7 +451,8 @@
 
             .chat-input-wrapper button:hover {
                 transform: translateY(-3px);
-                box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+                background: rgba(255, 255, 255, 0.4);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
             }
 
             .chat-input-wrapper button:active {
@@ -483,49 +465,41 @@
                 display: flex;
                 gap: 10px;
                 flex-wrap: wrap;
-                background: white;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(10px);
+                position: relative;
+                z-index: 2;
             }
 
             .suggestion-chip {
                 padding: 10px 18px;
-                background: #f5f7fa;
-                border: 2px solid #e8ecef;
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: 20px;
                 cursor: pointer;
                 font-size: 14px;
-                color: #666;
+                color: white;
                 transition: all 0.3s;
                 font-weight: 500;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             }
 
             .suggestion-chip:hover {
-                background: var(--primary);
-                color: white;
-                border-color: var(--primary);
+                background: rgba(255, 255, 255, 0.35);
+                border-color: rgba(255, 255, 255, 0.5);
                 transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             }
 
             /* RESPONSIVE */
             @media (max-width: 768px) {
-                .navbar {
-                    padding: 15px 4%;
+                body {
+                    padding: 10px;
                 }
 
-                .logo {
-                    font-size: 22px;
-                }
-
-                .nav-links {
-                    gap: 15px;
-                }
-
-                .nav-links a {
-                    font-size: 13px;
-                }
-
-                .container {
-                    padding: 90px 10px 10px;
+                .chat-card {
+                    border-radius: 30px;
                 }
 
                 .chat-header h1 {
@@ -564,93 +538,80 @@
     </head>
     <body>
         <div class="particles">
-            <div class="particle">✨</div>
-            <div class="particle">💆</div>
-            <div class="particle">🧴</div>
-            <div class="particle">🌟</div>
-            <div class="particle">😊</div>
+            <div class="particle">◆</div>
+            <div class="particle">●</div>
+            <div class="particle">◇</div>
+            <div class="particle">○</div>
+            <div class="particle">◈</div>
+            <div class="particle">◉</div>
         </div>
 
-        <nav class="navbar">
-            <div class="logo">
-                SkinDetector<span style="color: var(--secondary)">AI</span>
+        <div class="chat-card">
+            <div class="chat-header">
+                <div class="icon"Dermabot</div>
+                <h1>AI Skin Care Assistant</h1>
+                <p>
+                    Get personalized skincare advice • Powered by AI •
+                    Available 24/7
+                </p>
             </div>
-            <div class="nav-links">
-                <a href="#"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-camera"></i> Scanner</a>
-                <a href="#"><i class="fas fa-robot"></i> Chat AI</a>
-                <a href="#"><i class="fas fa-history"></i> History</a>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        Hi there! I'm your AI skincare assistant. I can
+                        help you with:
+                        <br /><br />
+                        • Identifying your skin type<br />
+                        • Product recommendations<br />
+                        • Skincare routine advice<br />
+                        • Ingredient information<br />
+                        • Tips for healthy skin<br />
+                        <br />
+                        What would you like to know about skincare today?
+                    </div>
+                </div>
             </div>
-        </nav>
 
-        <div class="container">
-            <div class="chat-card">
-                <div class="chat-header">
-                    <div class="icon">🔬</div>
-                    <h1>AI Skin Care Assistant</h1>
-                    <p>
-                        Get personalized skincare advice • Powered by AI •
-                        Available 24/7
-                    </p>
+            <div class="quick-suggestions">
+                <div
+                    class="suggestion-chip"
+                    onclick="sendQuickMessage('What is my skin type?')"
+                >
+                    What's my skin type?
                 </div>
+                <div
+                    class="suggestion-chip"
+                    onclick="
+                        sendQuickMessage('Recommend products for oily skin')
+                    "
+                >
+                    Product recommendations
+                </div>
+                <div
+                    class="suggestion-chip"
+                    onclick="sendQuickMessage('How to treat acne?')"
+                >
+                    Acne treatment
+                </div>
+                <div
+                    class="suggestion-chip"
+                    onclick="sendQuickMessage('Best skincare routine')"
+                >
+                    Skincare routine
+                </div>
+            </div>
 
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-content">
-                            Hi there! 👋 I'm your AI skincare assistant. I can
-                            help you with:
-                            <br /><br />
-                            ✨ Identifying your skin type<br />
-                            💆 Product recommendations<br />
-                            📋 Skincare routine advice<br />
-                            🧴 Ingredient information<br />
-                            💡 Tips for healthy skin<br />
-                            <br />
-                            What would you like to know about skincare today?
-                        </div>
-                    </div>
-                </div>
-
-                <div class="quick-suggestions">
-                    <div
-                        class="suggestion-chip"
-                        onclick="sendQuickMessage('What is my skin type?')"
-                    >
-                        🔍 What's my skin type?
-                    </div>
-                    <div
-                        class="suggestion-chip"
-                        onclick="
-                            sendQuickMessage('Recommend products for oily skin')
-                        "
-                    >
-                        🧴 Product recommendations
-                    </div>
-                    <div
-                        class="suggestion-chip"
-                        onclick="sendQuickMessage('How to treat acne?')"
-                    >
-                        💊 Acne treatment
-                    </div>
-                    <div
-                        class="suggestion-chip"
-                        onclick="sendQuickMessage('Best skincare routine')"
-                    >
-                        📋 Skincare routine
-                    </div>
-                </div>
-
-                <div class="chat-input-wrapper">
-                    <input
-                        type="text"
-                        id="chatInput"
-                        placeholder="Ask me anything about skincare..."
-                    />
-                    <button onclick="sendMessage()">
-                        <i class="fas fa-paper-plane"></i> Send
-                    </button>
-                </div>
+            <div class="chat-input-wrapper">
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Ask me anything about skincare..."
+                />
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
             </div>
         </div>
 
@@ -665,7 +626,7 @@
                 const messageDiv = document.createElement("div");
                 messageDiv.className = `message ${type}`;
 
-                const avatar = type === "bot" ? "🤖" : "👤";
+                const avatar = type === "bot" ? "AI" : "You";
 
                 messageDiv.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
@@ -683,7 +644,7 @@
                 typingDiv.className = "message bot";
                 typingDiv.id = "typing-indicator";
                 typingDiv.innerHTML = `
-                <div class="message-avatar">🤖</div>
+                <div class="message-avatar">AI</div>
                 <div class="message-content">
                     <div class="typing-indicator">
                         <span></span><span></span><span></span>
@@ -760,7 +721,7 @@
 
                     // Show error message
                     addMessage(
-                        "Sorry, I'm having trouble connecting right now. Please try again in a moment. 🔄",
+                        "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
                         "bot",
                     );
                     console.error("Error:", error);
